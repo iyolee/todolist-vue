@@ -5,6 +5,25 @@ const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 
 const config = merge(base, {
+	mode: 'development',
+	entry: path.resolve(__dirname, '../src/index.js'),
+	output: {
+		path: path.resolve(__dirname, '../dist'),
+		filename: 'bundle.[hash: 8].js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.styl(us)?$/,
+				loader: [
+					'vue-style-loader',
+					'css-loader',
+					'postcss-loader',
+					'stylus-loader'
+				]
+			}
+		]
+	},
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(
