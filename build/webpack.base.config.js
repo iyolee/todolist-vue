@@ -1,18 +1,18 @@
-const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 const config = {
-	mode: "development",
-	entry: path.resolve(__dirname, "../src/index.js"),
+	mode: 'development',
+	entry: path.resolve(__dirname, '../src/index.js'),
 	output: {
-		path: path.resolve(__dirname, "../dist"),
-		filename: "bundle.js"
+		path: path.resolve(__dirname, '../dist'),
+		filename: 'bundle.js'
 	},
 	module: {
 		rules: [
 			{
 				test: /\.vue$/,
-				loader: "vue-loader",
+				loader: 'vue-loader',
 				options: {
 					compilerOptions: {
 						preserveWhitespace: false
@@ -20,31 +20,26 @@ const config = {
 				}
 			},
 			{
-				test: /\.js$/,
-				loader: "babel-loader",
+				test: /\.js[x]?$/,
+				loader: 'babel-loader',
 				exclude: /node_modules/
 			},
 			{
-				test: /\.css$/,
-				loader: ["style-loader", "css-loader"]
-			},
-			{
 				test: /\.styl(us)?$/,
-
-				loader: ["vue-style-loader", "css-loader", "stylus-loader"]
+				loader: ['vue-style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,
-				loader: "url-loader",
+				loader: 'url-loader',
 				options: {
 					limit: 10000,
-					name: "[name].[ext]?[hash]"
+					name: '[name].[ext]?[hash]'
 				}
 			}
 		]
 	},
-	devtool: "inline-source-map",
+	devtool: 'inline-source-map',
 	plugins: [new VueLoaderPlugin()]
-};
+}
 
-module.exports = config;
+module.exports = config
